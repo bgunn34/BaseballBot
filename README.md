@@ -3,12 +3,13 @@
     - pybaseball seems to be a great way to get historical player statisitcs, even up to that day.
     - I can get game outcomes fairly easily using the schedule_and_record function.
     - I still need some way to get a game's lineups and starter, both historically and in future retrosheet.org!
+	- get current rosters for bullpen.
 2) get players wOBA for the last 3 years using a threshold to make sure that we don't try to incorporate parital or missing seasons.
 3) weight the wOBA for recency against sample size. So last year's wOBA would be worth more than the year before's, etc. Will probably want to figure out how to play with those weights to see which one is best before selecting the one to put in the bot itself.
 4) any other metrics for hitters? maybe RC+?
 5) choose a metric for pitchers.
-6) how do we handle bullpens
-7) get a good data set of teams, lineups, pitchers, outcomes.
+6) how do we handle bullpens?
+7) get a good data set of teams, lineups, pitchers, outcomes. DONE
 8) try out different ML algorithms and see what scores most highly.
 
 
