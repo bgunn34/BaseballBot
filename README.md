@@ -12,6 +12,8 @@
 7) get a good data set of teams, lineups, pitchers, outcomes. DONE
 8) try out different ML algorithms and see what scores most highly.
 
+Resources
+https://github.com/jldbc/pybaseball
 
 
 Retrosheet Data Notice
