@@ -7,6 +7,7 @@ Created on Sun Aug 16 11:48:20 2020
 
 import pandas as pd
 from pybaseball import team_batting
+from pybaseball import team_pitching
 from pybaseball import standings
 
 
@@ -19,10 +20,12 @@ def get_nickname(string):
 
 years = [2019,2018,2017,2016,2015]
 df_list = []
+df2_list = []
 
 for year in years:
     ## get team batting stats and W/L
     df = team_batting(year)
+    df2 = team_pitching(year)
     wl = standings(year)
 
     ## clean up the standings so that it's one df of (name, wins)
@@ -32,8 +35,14 @@ for year in years:
 
     ## merge the wins into the stats df, add this df to the list.
     df = df.merge(wl,left_on='Team',right_on='nickname')
+    df2 = df2.merge(wl,left_on='Team',right_on='nickname')
     df.drop(labels='nickname',axis=1,inplace=True)
+    df2.drop(labels='nickname',axis=1,inplace=True)
     df_list.append(df)
+    df2_list.append(df2)
 
 out_df = pd.concat(df_list)
 out_df.to_csv('data//team_batting_stats.csv')
+
+out_df2 = pd.concat(df2_list)
+out_df2.to_csv('data//team_pitching_stats.csv')
