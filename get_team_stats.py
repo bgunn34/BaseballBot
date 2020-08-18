@@ -34,15 +34,15 @@ for year in years:
     wl = wl.loc[:,['nickname','W']]
 
     ## merge the wins into the stats df, add this df to the list.
+    df = df.merge(df2, on=['Season','Team'], suffixes=['_bat','_pitch'])
     df = df.merge(wl,left_on='Team',right_on='nickname')
-    df2 = df2.merge(wl,left_on='Team',right_on='nickname')
     df.drop(labels='nickname',axis=1,inplace=True)
-    df2.drop(labels='nickname',axis=1,inplace=True)
+    df.rename(columns={''})
     df_list.append(df)
-    df2_list.append(df2)
+#    df2_list.append(df2)
 
 out_df = pd.concat(df_list)
-out_df.to_csv('data//team_batting_stats.csv')
+out_df.to_csv('data//team_stats.csv')
 
-out_df2 = pd.concat(df2_list)
-out_df2.to_csv('data//team_pitching_stats.csv')
+# out_df2 = pd.concat(df2_list)
+# out_df2.to_csv('data//team_pitching_stats.csv')
