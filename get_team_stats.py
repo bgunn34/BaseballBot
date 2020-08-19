@@ -18,11 +18,13 @@ def get_nickname(string):
     else:
         return string.split(' ')[-1]
 
-years = [2019,2018,2017,2016,2015]
+year = 2005
+end_year = 2019
+keep_going = 1
 df_list = []
 df2_list = []
 
-for year in years:
+while keep_going == 1:
     ## get team batting stats and W/L
     df = team_batting(year)
     df2 = team_pitching(year)
@@ -37,9 +39,11 @@ for year in years:
     df = df.merge(df2, on=['Season','Team'], suffixes=['_bat','_pitch'])
     df = df.merge(wl,left_on='Team',right_on='nickname')
     df.drop(labels='nickname',axis=1,inplace=True)
-    df.rename(columns={''})
     df_list.append(df)
-#    df2_list.append(df2)
+    
+    year += 1
+    if year > end_year:
+        keep_going = 0
 
 out_df = pd.concat(df_list)
 out_df.to_csv('data//team_stats.csv')
