@@ -8,10 +8,6 @@ import pandas as pd
 import numpy as np
 from pybaseball import statcast
 
-df = statcast(start_dt='2019-03-20',end_dt='2019-04-21')
-
-df.head()
-
-df.game_date.min()
+df = statcast(start_dt='2017-03-01',end_dt='2020-08-24')
 
 df.to_csv('data\\statcast.csv')
