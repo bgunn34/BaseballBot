@@ -10,12 +10,7 @@ import numpy as np
 pd.options.display.max_rows = 1000
 
 df = pd.read_csv('data\\statcast.csv')
-print(df.isna().sum())
-print(df.head())
-print(df.game_year.value_counts())
-
-test_df = df.loc[df.pitch_type.isna()]
-
+print(df.dtypes)
 keep_columns = ['pitch_type',
                 'game_date',
                 'release_speed',
@@ -31,6 +26,7 @@ keep_columns = ['pitch_type',
                 'home_team',
                 'away_team',
                 'type',
+                'des',
                 'game_year',
                 'pfx_x',
                 'pfx_z',
@@ -44,21 +40,22 @@ keep_columns = ['pitch_type',
                 'az',
                 'sz_top',
                 'sz_bot',
+                'launch_speed',
+                'launch_angle',
+                'launch_speed_angle',
+                'estimated_woba_using_speedangle',
                 'effective_speed',
                 'release_spin_rate',
                 'release_extension',
                 'woba_value',
                 'woba_denom']
 
-print(df.columns)
-
 df = df.loc[:,keep_columns]
-
-df.to_csv('data\\statcast_cleaned.csv')
-
 p_woba_against = pd.pivot_table(df,
                                 index=['player_name','game_year'],
                                 values=['woba_value','woba_denom'],
                                 aggfunc=np.sum)
 
 p_woba_against['woba_against'] = p_woba_against.woba_value / p_woba_against.woba_denom
+
+df.to_csv('data\\statcast_cleaned.csv')
