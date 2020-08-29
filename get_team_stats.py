@@ -18,11 +18,13 @@ def get_nickname(string):
     else:
         return string.split(' ')[-1]
 
-years = [2019,2018,2017,2016,2015]
+year = 2005
+end_year = 2019
+keep_going = 1
 df_list = []
 df2_list = []
 
-for year in years:
+while keep_going == 1:
     ## get team batting stats and W/L
     df = team_batting(year)
     df2 = team_pitching(year)
@@ -34,15 +36,17 @@ for year in years:
     wl = wl.loc[:,['nickname','W']]
 
     ## merge the wins into the stats df, add this df to the list.
+    df = df.merge(df2, on=['Season','Team'], suffixes=['_bat','_pitch'])
     df = df.merge(wl,left_on='Team',right_on='nickname')
-    df2 = df2.merge(wl,left_on='Team',right_on='nickname')
     df.drop(labels='nickname',axis=1,inplace=True)
-    df2.drop(labels='nickname',axis=1,inplace=True)
     df_list.append(df)
-    df2_list.append(df2)
+    
+    year += 1
+    if year > end_year:
+        keep_going = 0
 
 out_df = pd.concat(df_list)
-out_df.to_csv('data//team_batting_stats.csv')
+out_df.to_csv('data//team_stats.csv')
 
-out_df2 = pd.concat(df2_list)
-out_df2.to_csv('data//team_pitching_stats.csv')
+# out_df2 = pd.concat(df2_list)
+# out_df2.to_csv('data//team_pitching_stats.csv')
