@@ -10,11 +10,11 @@ import numpy as np
 from pybaseball import batting_stats
 from pybaseball import pitching_stats
 
-df = batting_stats(2017,2019,qual=50,ind=0)
+df = batting_stats(2017,2019,qual=50)
 df.to_csv('data\\batters_hist.csv')
 df = batting_stats(2020,qual=50)
 df.to_csv('data\\batters_year.csv')
-df = pitching_stats(2017,2019,ind=0)
+df = pitching_stats(2017,2019,qual=50)
 df.to_csv('data\\pitchers_hist.csv')
 df = pitching_stats(2020)
 df.to_csv('data\\pitchers_year.csv')
