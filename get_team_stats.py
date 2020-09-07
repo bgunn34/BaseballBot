@@ -47,6 +47,3 @@ while keep_going == 1:
 
 out_df = pd.concat(df_list)
 out_df.to_csv('data//team_stats.csv')
-
-# out_df2 = pd.concat(df2_list)
-# out_df2.to_csv('data//team_pitching_stats.csv')
