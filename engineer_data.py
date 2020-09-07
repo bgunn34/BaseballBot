@@ -51,6 +51,8 @@ fg = pd.read_csv('data\\pitchers_hist.csv')
 # build a list of dataframes where each is a filtered, pivoted frame of the 
 # given pitch selection.
 
+print(sc.dtypes)
+
 ffs = sc.loc[sc.pitch_type.isin(['FF','FT','SI'])].copy()
 sls = sc.loc[sc.pitch_type == 'SL'].copy()
 cts = sc.loc[sc.pitch_type == 'FC'].copy()
@@ -59,20 +61,20 @@ chs = sc.loc[sc.pitch_type == 'CH'].copy()
 sfs = sc.loc[sc.pitch_type.isin(['FS','FO'])].copy()
 kns = sc.loc[sc.pitch_type == 'KN'].copy()
 
-ff_table = pd.pivot_table(ffs,index=['player_name','game_year'],values=['release_spin_rate','release_extension']).reset_index()
-ff_table.columns = ['player_name','year','fb_extension','fb_spinrate']
-sl_table = pd.pivot_table(sls,index=['player_name','game_year'],values=['release_spin_rate','release_extension']).reset_index()
-sl_table.columns = ['player_name','year','sl_extension','sl_spinrate']
-cts_table = pd.pivot_table(cts,index=['player_name','game_year'],values=['release_spin_rate','release_extension']).reset_index()
-cts_table.columns = ['player_name','year','ct_extension','ct_spinrate']
-cbs_table = pd.pivot_table(cbs,index=['player_name','game_year'],values=['release_spin_rate','release_extension']).reset_index()
-cbs_table.columns = ['player_name','year','cb_extension','cb_spinrate']
-chs_table = pd.pivot_table(chs,index=['player_name','game_year'],values=['release_spin_rate','release_extension']).reset_index()
-chs_table.columns = ['player_name','year','ch_extension','ch_spinrate']
-sfs_table = pd.pivot_table(sfs,index=['player_name','game_year'],values=['release_spin_rate','release_extension']).reset_index()
-sfs_table.columns = ['player_name','year','sfs_extension','sfs_spinrate']
-kns_table = pd.pivot_table(kns,index=['player_name','game_year'],values=['release_spin_rate','release_extension']).reset_index()
-kns_table.columns = ['player_name','year','kn_extension','kn_spinrate']
+ff_table = pd.pivot_table(ffs,index=['player_name','game_year'],values=['release_speed','release_spin_rate','release_extension']).reset_index()
+ff_table.columns = ['player_name','year','fb_extension','fb_spinrate','fb_velo']
+sl_table = pd.pivot_table(sls,index=['player_name','game_year'],values=['release_speed','release_spin_rate','release_extension']).reset_index()
+sl_table.columns = ['player_name','year','sl_extension','sl_spinrate','sl_velo']
+cts_table = pd.pivot_table(cts,index=['player_name','game_year'],values=['release_speed','release_spin_rate','release_extension']).reset_index()
+cts_table.columns = ['player_name','year','ct_extension','ct_spinrate','ct_velo']
+cbs_table = pd.pivot_table(cbs,index=['player_name','game_year'],values=['release_speed','release_spin_rate','release_extension']).reset_index()
+cbs_table.columns = ['player_name','year','cb_extension','cb_spinrate','cb_velo']
+chs_table = pd.pivot_table(chs,index=['player_name','game_year'],values=['release_speed','release_spin_rate','release_extension']).reset_index()
+chs_table.columns = ['player_name','year','ch_extension','ch_spinrate','ch_velo']
+sfs_table = pd.pivot_table(sfs,index=['player_name','game_year'],values=['release_speed','release_spin_rate','release_extension']).reset_index()
+sfs_table.columns = ['player_name','year','sfs_extension','sfs_spinrate','sfs_velo']
+kns_table = pd.pivot_table(kns,index=['player_name','game_year'],values=['release_speed','release_spin_rate','release_extension']).reset_index()
+kns_table.columns = ['player_name','year','kn_extension','kn_spinrate','kn_velo']
 
 
 dfs = [ff_table,sl_table,cts_table,cbs_table,chs_table,sfs_table,kns_table]
@@ -88,6 +90,7 @@ fg_filtered = fg.loc[:,['Name',
                         'wCH',
                         'wSF',
                         'wKN',
+                        'WAR',
                         'ERA']]
 
 fg_filtered.columns = ['player_name',
@@ -99,6 +102,7 @@ fg_filtered.columns = ['player_name',
                        'wCH',
                        'wSF',
                        'wKN',
+                       'WAR',
                        'ERA']
 
 df_final = pd.merge(sc_final,fg_filtered,how='right',on=['player_name','year'])
