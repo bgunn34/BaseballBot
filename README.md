@@ -3,8 +3,20 @@
 
 ## Machine Learning Checklist:
 1. Frame the problem and look at the big picture.
+	1. The goal is not to build an algorithm that can predict games perfectly. There is too much randomness in baseball for that. The goal is to make probabalistic statements (the Phillies will win this game 45% of the time) and compare those statements to those made by betting institutions. I will be happy if we even come close to their level of accuracy. 
+	1. I should note that the only way to measure that accuracy will be against live data during the baseball season, so I am aiming to have this model in production by March 2021.
+	1. There are thousands of baseball statistics that are collected every day of the season. Part of the challenge is going to be determining which are important and which are just noise. 
 1. Get the data
+	1. see data_gathering directory. 
+	1. I used pybaseball to scrape 
+		1. pitch information from statcast 
+		1. team and player information from fangraphs 
+		1. lineup, starting pitcher, and outcome information from Retrosheet
+		1. **TODO** - for production I will need to get today's lineups and starting pitchers to make predictions against.
 1. Explore the data
+	1. see data_exploration folder.
+	1. I made detailed notes on every feature of the fangraphs data, see fangraphs_variable_description.xlsx
+	1. I analyzed win to stat correlations on the team level to glean some guidance on which stats to pay attention to in the massive fangraphs dataset. See Team_Stats_Analysis.ipynb
 1. Prepare the data
 1. Shortlist promising models
 1. Fine-tune the system
