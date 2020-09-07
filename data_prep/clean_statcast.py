@@ -9,7 +9,7 @@ import numpy as np
 
 pd.options.display.max_rows = 1000
 
-df = pd.read_csv('data\\statcast.csv')
+df = pd.read_csv('..\\data_gathering\\data\\statcast.csv')
 print(df.dtypes)
 keep_columns = ['pitch_type',
                 'game_date',
@@ -51,6 +51,11 @@ keep_columns = ['pitch_type',
                 'woba_denom']
 
 df = df.loc[:,keep_columns]
+
+## get number of runs scored on the pitch by reading the description
+df.des.fillna('none',inplace=True)
+df['runs_scored'] = df.des.apply(lambda x: x.count('scores') + x.count('homers'))
+
 p_woba_against = pd.pivot_table(df,
                                 index=['player_name','game_year'],
                                 values=['woba_value','woba_denom'],
@@ -58,4 +63,4 @@ p_woba_against = pd.pivot_table(df,
 
 p_woba_against['woba_against'] = p_woba_against.woba_value / p_woba_against.woba_denom
 
-df.to_csv('data\\statcast_cleaned.csv')
+df.to_csv('..\\data_gathering\\data\\statcast_cleaned.csv')

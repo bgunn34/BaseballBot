@@ -7,6 +7,7 @@ This is a regression problem. We want to predict ERA, which is a continuous vari
 Batch processing will be fine. While the final algorithm might want to retrain online, the goal of this one is to tell us what features we need. 
 
 ### To Do:
+- [ ] engineer a runs per ab feature at the pitcher/game level so that it can be merged onto the statcast game averages table in the next step.
 - [ ] Pivot the statcast data into pitcher/game tables, taking averages and sums of the data where appropriate. We'll probably lose some features in this step as well.
 - [ ] get a game level dataframe of innings pitched and runs allowed. I can calculate ERA from there. 
 - [ ] consider using a different rate metric than ERA. We know that if ERA is closely correlated to wins a less arbitrary rate stat (like runs per IP) should be as well. 
