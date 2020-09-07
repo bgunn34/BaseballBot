@@ -1,20 +1,20 @@
-##It would be a cool thing to try to predict baseball game outcomes.##
-1) scrape roster data, maybe from fangraphs or from statcast
-    - pybaseball seems to be a great way to get historical player statisitcs, even up to that day.
-    - I can get game outcomes fairly easily using the schedule_and_record function.
-    - I still need some way to get a game's lineups and starter, both historically and in future retrosheet.org!
-	- get current rosters for bullpen.
-2) get players wOBA for the last 3 years using a threshold to make sure that we don't try to incorporate parital or missing seasons.
-3) weight the wOBA for recency against sample size. So last year's wOBA would be worth more than the year before's, etc. Will probably want to figure out how to play with those weights to see which one is best before selecting the one to put in the bot itself.
-4) any other metrics for hitters? maybe RC+?
-5) choose a metric for pitchers.
-6) how do we handle bullpens?
-7) get a good data set of teams, lineups, pitchers, outcomes. DONE
-8) try out different ML algorithms and see what scores most highly.
+# Goal: create a macine learning model that provides predictions on the outcomes of baseball games. 
+### We want to express the predictions as probabilities so that we can compare our model's predicition to betting lines published by Vegas, Fanduel, Draftkings et al.
 
-Resources
-https://github.com/jldbc/pybaseball
+## Machine Learning Checklist:
+1. Frame the problem and look at the big picture.
+1. Get the data
+1. Explore the data
+1. Prepare the data
+1. Shortlist promising models
+1. Fine-tune the system
+1. Launch!
 
+## Resources:
+Pandas, Numpy, Matplotlib, Seaborn, Scikit-Learn
+https://github.com/jldbc/pybaseball - python library to scrape baseball information from Fangraphs, Statcast, Retrosheet, etc. I am also a contributor to this project.
+
+Hands-On Machine Learning with Scikit-Learn, Keras, and Tensorflow by Aurelien Geron
 
 Retrosheet Data Notice
 
